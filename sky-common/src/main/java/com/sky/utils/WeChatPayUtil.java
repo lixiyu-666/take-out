@@ -104,6 +104,7 @@ public class WeChatPayUtil {
      * @param url
      * @return
      */
+
     private String get(String url) throws Exception {
         CloseableHttpClient httpClient = getClient();
 
@@ -163,6 +164,7 @@ public class WeChatPayUtil {
      * @param openid      微信用户的openid
      * @return
      */
+
     public JSONObject pay(String orderNum, BigDecimal total, String description, String openid) throws Exception {
         //统一下单，生成预支付交易单
         String bodyAsString = jsapi(orderNum, total, description, openid);
@@ -214,6 +216,7 @@ public class WeChatPayUtil {
      * @param total         原订单金额
      * @return
      */
+
     public String refund(String outTradeNo, String outRefundNo, BigDecimal refund, BigDecimal total) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("out_trade_no", outTradeNo);
@@ -233,3 +236,4 @@ public class WeChatPayUtil {
         return post(REFUNDS, body);
     }
 }
+

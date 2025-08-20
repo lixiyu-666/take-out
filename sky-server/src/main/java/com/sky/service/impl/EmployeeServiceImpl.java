@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         //密码比对
-        // TODO 后期需要进行md5加密，然后再进行比对
+        // 对前端传递的明文密码进行加密处理
         password = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!password.equals(employee.getPassword())) {
             //密码错误
@@ -71,30 +71,26 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeDTO
      */
     @Override
-    public void save(EmployeeDTO employeeDTO) {
+    public void save(EmployeeDTO employeeDTO){
         Employee employee = new Employee();
-
-        //对象属性拷贝
+        //信息拷贝
         BeanUtils.copyProperties(employeeDTO, employee);
 
-        //设置账号的状态，默认正常状态 1表示正常 0表示锁定
+        //设置账号状态
         employee.setStatus(StatusConstant.ENABLE);
 
-        //设置密码，默认密码123456
+        //默认密码123456，采用MD5加密
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
-        //设置当前记录的创建时间和修改时间
+        //设置时间
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
 
-//        通过ThreadLocal获取用户信息
-        Long currentId = BaseContext.getCurrentId();
+        //设置人员
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
 
-        //设置当前记录创建人id和修改人id
-        employee.setCreateUser(currentId);//目前写个假数据，后期修改
-        employee.setUpdateUser(currentId);
-
-        employeeMapper.insert(employee);//后续步骤定义
+        employeeMapper.insert(employee);
     }
 
     /**

@@ -4,3 +4,18 @@
 *.class
 *Test.java
 **/test/
+# 忽略所有环境的配置文件（推荐）
+/src/main/resources/application-*.yml
+/src/main/resources/application-*.properties
+
+# 或仅忽略开发环境的配置文件（示例）
+/src/main/resources/application-dev.yml
+
+# 忽略所有敏感配置目录（可选）
+/config/
+/secret/
+
+# 其他需要忽略的文件
+*.keystore
+*.jks
+*.p12

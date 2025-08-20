@@ -152,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
         Orders orders = orderMapper.getByNumberAndUserId(orderNumber, userId);
 
 //        调用微信支付接口，生成预支付交易单
-        JSONObject jsonObject = weChatPayUtil.pay(
+       JSONObject jsonObject = weChatPayUtil.pay(
                 ordersPaymentDTO.getOrderNumber(),
                 orders.getAmount(),
                 "苍穹外卖订单" + orders.getId(),

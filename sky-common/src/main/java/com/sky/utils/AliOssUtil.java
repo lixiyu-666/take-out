@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import java.io.ByteArrayInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Data
 @AllArgsConstructor
@@ -26,6 +28,7 @@ public class AliOssUtil {
      * @param objectName
      * @return
      */
+
     public String upload(byte[] bytes, String objectName) {
 
         // 创建OSSClient实例。
@@ -61,7 +64,7 @@ public class AliOssUtil {
                 .append("/")
                 .append(objectName);
 
-        log.info("文件上传到:{}", stringBuilder.toString());
+        //log.info("文件上传到:{}", stringBuilder.toString());
 
         return stringBuilder.toString();
     }
